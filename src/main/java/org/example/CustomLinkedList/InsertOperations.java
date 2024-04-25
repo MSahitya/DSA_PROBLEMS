@@ -1,6 +1,7 @@
 package org.example.CustomLinkedList;
 
 public class InsertOperations {
+   static Node head;
     public static void main(String[] args) {
         Node n1=new Node(10);
         Node n2=new Node(20);
@@ -11,7 +12,7 @@ public class InsertOperations {
         n1.next=n2;n2.next=n3;n3.next=n4;n4.next=n5;
 
         //1.Insert at the Beginning
-        Node head=null;
+
         head=n1;
         Node n6=new Node(60);
         Node temp=head;
@@ -31,8 +32,9 @@ public class InsertOperations {
         headli.next=liend;
         LinkedListCustomInput.recursiveDisplay(head);
 
-
-
-
+//Insert Node in the Recursion
+    // insertRec(3,120);
     }
+
+
 }
