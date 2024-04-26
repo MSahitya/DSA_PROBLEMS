@@ -8,25 +8,43 @@ public class LL {
 
     public LL() {
         this.size = 0;
+        this.head = null;
+        this.tail = null;
+    }
+
+    public Node getHead() {
+        return head;
+    }
+
+    public Node getTail() {
+        return tail;
+    }
+
+    public int getSize() {
+        return size;
     }
 
     public void insertFirst(int val){
         Node node = new Node(val);
+        if( head == null){
+            head = node;
+            tail = node;
+            return;
+        }
         node.next = head;
         head = node;
-        if(tail == null){
-            tail=head;
-               }
-
         size++;
     }
     public void insertEnd(int val){
 
-        if(tail == null)
-            insertFirst(val);
-        Node node=new Node(val);
-        tail.next=node;
-        tail=node;
+        if (head == null) {
+            // If the list is empty, set head to the new node
+           insertFirst(val);
+           return;
+        }
+        Node newNode = new Node(val);
+        tail.next=newNode;
+        tail=newNode;
         size++;
     }
 
@@ -111,6 +129,77 @@ public void display(){
         }
     System.out.print(" END \n");
 }
+public static LL merge(LL first, LL second){
+        Node f = first.head;
+        Node s = second.head;
+        LL ans = new LL();ans.display();
+        while( f != null && s != null){
+            if(f.val < s.val){
+
+                ans.insertEnd(f.val);
+                f = f.next;
+            }
+            else{
+
+                ans.insertEnd(s.val);
+                s = s.next;
+            }
+        }
+
+        while ( f != null){
+            ans.insertEnd(f.val);
+            f = f.next;
+        }
+
+        while ( s!= null){
+            ans.insertEnd(s.val);
+            s = s.next;
+        }
+           ans.display();
+return  ans;
+}
+    public boolean hasCycle(Node head) {
+
+        Node  fastPointer = head;
+        Node slowPointer = head;
+
+
+        while( fastPointer != null && fastPointer.next != null){
+            slowPointer = slowPointer.next;
+            fastPointer =fastPointer.next.next;
+            if(slowPointer == fastPointer ){
+                return true;
+            }
+        }
+
+        return false;
+
+    }
+
+    public int lengthOftheCycle(Node head) {
+
+        Node  fastPointer = head;
+        Node slowPointer = head;
+
+
+        while( fastPointer != null && fastPointer.next != null){
+            slowPointer = slowPointer.next;
+            fastPointer =fastPointer.next.next;
+            if(slowPointer == fastPointer ){
+                Node temp = slowPointer;
+                int length=0;
+                do{
+                    temp = temp.next;
+                    length++;
+                }while(temp != slowPointer);
+             return 0;
+            }
+        }
+            return 0;
+
+
+    }
+
 
 
     private class Node{
